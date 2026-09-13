@@ -54,7 +54,7 @@ export function ProductCard({ product }: { product: Product }) {
         )}
 
         <h3 className="mt-1 text-base font-bold text-neutral-900">
-          <Link href={`/p/${product.slug}`} className="static after:absolute after:inset-0 after:content-['']">
+          <Link href={`/trackers/p/${product.slug}`} className="static after:absolute after:inset-0 after:content-['']">
             {product.name}
           </Link>
         </h3>

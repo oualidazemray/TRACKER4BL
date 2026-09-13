@@ -8,6 +8,10 @@ type ProductPreviewProps = {
   stickerSrc?: string;
   stickerAlt?: string;
   className?: string;
+  // Lets a caller (e.g. the hero collage, which wants a square) opt out
+  // of the default aspect ratio instead of fighting it via `className` —
+  // two aspect-* utilities in one class list is a specificity coin flip.
+  aspectClassName?: string;
 };
 
 // When a product supplies a real cover image, it wins outright — no
@@ -23,12 +27,12 @@ export function ProductPreview({
   stickerSrc,
   stickerAlt,
   className = '',
+  aspectClassName,
 }: ProductPreviewProps) {
+  const aspect = aspectClassName ?? (coverImage ? 'aspect-[29/36]' : 'aspect-[4/3]');
   return (
     <div
-      className={`relative w-full overflow-hidden rounded-xl bg-[var(--pale)] ${
-        coverImage ? 'aspect-[29/36]' : 'aspect-[4/3]'
-      } ${className}`}
+      className={`relative w-full overflow-hidden rounded-xl bg-[var(--pale)] ${aspect} ${className}`}
     >
       {coverImage ? (
         <Image

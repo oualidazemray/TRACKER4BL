@@ -21,13 +21,13 @@ export function Footer() {
           <p className="text-sm font-semibold uppercase tracking-wide text-white/50">Shop</p>
           <ul className="mt-3 space-y-2 text-sm text-white/70">
             <li>
-              <Link href="/#shop" className="transition-colors hover:text-white">
+              <Link href="/trackers#shop" className="transition-colors hover:text-white">
                 All products
               </Link>
             </li>
             {categories.map((category) => (
               <li key={category}>
-                <Link href="/#shop" className="transition-colors hover:text-white">
+                <Link href="/trackers#shop" className="transition-colors hover:text-white">
                   {category}
                 </Link>
               </li>
