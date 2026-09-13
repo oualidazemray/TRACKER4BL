@@ -14,6 +14,9 @@ export const forge: Product = {
   format: 'google-sheets',
   status: 'live',
 
+  badge: 'New',
+  previewType: 'blaze',
+
   theme: {
     ink: '#0B2545',
     primary: '#134074',

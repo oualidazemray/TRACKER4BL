@@ -13,7 +13,15 @@ export const brand = {
   name: 'TRACKERS4BL',
   contactEmail: 'hello@trackers4bl.com',
   copyrightLine: '© 2026 TRACKERS4BL. All rights reserved.',
+  shortDescription:
+    'Small, beautifully designed digital tools — habit trackers, planners, and more — built to turn everyday effort into visible progress.',
 };
+
+// Placeholder handles — swap for real profiles when they exist.
+export const socialLinks = [
+  { label: 'Instagram', href: '#' },
+  { label: 'TikTok', href: '#' },
+];
 
 export const howItWorks: HowItWorksStep[] = [
   {

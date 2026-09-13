@@ -14,6 +14,9 @@ export const bloom: Product = {
   format: 'google-sheets',
   status: 'live',
 
+  badge: 'New',
+  previewType: 'organic',
+
   theme: {
     ink: '#3E2136',
     primary: '#7B3F9E',

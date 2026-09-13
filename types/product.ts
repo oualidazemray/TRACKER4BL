@@ -37,6 +37,11 @@ export type ProductFaqEntry = {
   a: string;
 };
 
+// Drives which abstract, CSS-based mockup ProductPreview renders on the
+// shop grid and hero collage. New categories reuse an existing motif
+// (a budget planner might pick 'chart') instead of needing a new one.
+export type ProductPreviewType = 'organic' | 'blaze' | 'grid' | 'chart';
+
 export type ProductPricing = {
   price: number;
   guidePrice?: number;
@@ -73,6 +78,11 @@ export type Product = {
   pricing: ProductPricing;
 
   hero: ProductHero;
+
+  // Card-level extras for the shop grid. Both optional so a future
+  // product can omit them — previewType falls back to 'grid'.
+  badge?: string;
+  previewType?: ProductPreviewType;
 
   // Optional: the growth-stage strip. Only some products have this.
   stages?: ProductStage[];
