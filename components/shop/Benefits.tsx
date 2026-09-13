@@ -1,3 +1,5 @@
+import { brand } from '@/content/site';
+
 const benefits = [
   {
     title: 'Instant delivery',
@@ -29,7 +31,7 @@ export function Benefits() {
       <div className="mx-auto max-w-6xl">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-3xl">
-            Why TRACKERS4BL
+            Why {brand.name}
           </h2>
           <p className="mt-3 text-base text-neutral-600">
             We build small, beautifully designed tools you actually enjoy opening — download

@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { visibleProducts, getCategories } from '@/content/products';
+import { brand } from '@/content/site';
 
 // Site-level chrome shared by the homepage and every /p/[slug] page.
 // Category-oriented on purpose — no per-product toggle here, since the
@@ -14,7 +15,7 @@ export function Header() {
       <div className="mx-auto max-w-6xl px-4 py-3 sm:py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="text-lg font-extrabold tracking-tight text-neutral-900">
-            TRACKERS4BL
+            {brand.name}
           </Link>
 
           <Link

@@ -94,7 +94,7 @@ export const forge: Product = {
   ],
 
   seo: {
-    title: 'FORGE — Habit Tracker for Men | TRACKERS4BL',
+    title: 'FORGE — Habit Tracker for Men | TORLIMORLI',
     description:
       'A Google Sheets habit tracker where a fire builds under each day you tick your habits off. 16 tabs, auto-calculating stats, instant access.',
     ogImage: '/forge/og-image.png',

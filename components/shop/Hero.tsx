@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
 import type { Product } from '@/types/product';
+import { brand } from '@/content/site';
 import { ProductPreview } from './ProductPreview';
 
 // Brand-level hero — deliberately not about any one product. The collage
@@ -21,7 +22,7 @@ export function Hero({ products }: { products: Product[] }) {
           </h1>
 
           <p className="mx-auto mt-5 max-w-md text-base text-neutral-600 sm:text-lg lg:mx-0">
-            TRACKERS4BL makes small, beautifully designed digital tools — habit trackers,
+            {brand.name} makes small, beautifully designed digital tools — habit trackers,
             planners, and more — built right into Google Sheets, so a little daily effort
             turns into something you can actually see.
           </p>
@@ -37,7 +38,7 @@ export function Hero({ products }: { products: Product[] }) {
               href="#about"
               className="inline-flex min-h-[44px] items-center justify-center rounded-full px-7 text-base font-semibold text-neutral-700 transition-colors duration-150 hover:text-neutral-900"
             >
-              Why TRACKERS4BL →
+              Why {brand.name} →
             </a>
           </div>
         </div>

@@ -10,9 +10,9 @@ export type HowItWorksStep = {
 };
 
 export const brand = {
-  name: 'TRACKERS4BL',
-  contactEmail: 'hello@trackers4bl.com',
-  copyrightLine: '© 2026 TRACKERS4BL. All rights reserved.',
+  name: 'TORLIMORLI',
+  contactEmail: 'hello@torlimorli.com',
+  copyrightLine: '© 2026 TORLIMORLI. All rights reserved.',
   shortDescription:
     'Small, beautifully designed digital tools — habit trackers, planners, and more — built to turn everyday effort into visible progress.',
 };

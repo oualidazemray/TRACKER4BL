@@ -94,7 +94,7 @@ export const bloom: Product = {
   ],
 
   seo: {
-    title: 'BLOOM — Habit Tracker for Women | TRACKERS4BL',
+    title: 'BLOOM — Habit Tracker for Women | TORLIMORLI',
     description:
       'A Google Sheets habit tracker where a flower grows under each day you tick your habits off. 16 tabs, auto-calculating stats, instant access.',
     ogImage: '/bloom/og-image.png',
