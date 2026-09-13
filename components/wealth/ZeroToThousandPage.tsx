@@ -6,17 +6,16 @@ import { brand } from '@/content/site';
 // Standalone landing page for the $0→$1000 guide. Deliberately its own
 // visual system (navy + gold, dark by default) rather than the trackers'
 // light pastel theme — a second product line with nothing in common
-// design-wise, sharing only the parent brand's footer credit.
+// design-wise, sharing only the parent brand's footer credit. Kept short
+// on purpose: no step-by-step breakdown or interior-page previews, since
+// that's the paid content — just enough to sell it, like the trackers
+// product pages do.
 export function ZeroToThousandPage() {
   return (
     <div className="bg-[#0E1424] text-white">
       <Hero />
-      <WhoAndWhat />
-      <Roadmap />
-      <InsideLook />
       <Pricing />
       <Faq />
-      <FinalCta />
       <MiniFooter />
     </div>
   );
@@ -75,16 +74,10 @@ function Hero() {
             {g.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center lg:justify-start">
+          <div className="mt-8 flex justify-center lg:justify-start">
             <GoldButton href={g.checkoutUrl}>
               Get the Playbook — {formatMoney(g.price, g.currency)}
             </GoldButton>
-            <a
-              href="#roadmap"
-              className="text-sm font-semibold text-white/70 underline-offset-4 hover:text-white hover:underline"
-            >
-              See the 9 steps ↓
-            </a>
           </div>
 
           <ul className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs font-medium uppercase tracking-wide text-white/50 lg:justify-start">
@@ -111,127 +104,6 @@ function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function WhoAndWhat() {
-  return (
-    <section className="bg-[#F7F3EA] px-4 py-16 text-[#151A30] sm:py-20">
-      <div className="mx-auto grid max-w-5xl gap-12 sm:grid-cols-2">
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9974A]">Who This Is For</p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
-            No experience required
-          </h2>
-          <ul className="mt-6 space-y-4">
-            {g.audience.map((line) => (
-              <BulletItem key={line}>{line}</BulletItem>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9974A]">
-            What You&rsquo;ll Walk Away With
-          </p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
-            A real product, live and selling
-          </h2>
-          <ul className="mt-6 space-y-4">
-            {g.outcomes.map((line) => (
-              <BulletItem key={line}>{line}</BulletItem>
-            ))}
-          </ul>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function BulletItem({ children }: { children: React.ReactNode }) {
-  return (
-    <li className="flex items-start gap-3 text-sm text-[#151A30]/80 sm:text-base">
-      <span className="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#151A30] text-[10px] font-bold text-[#C9974A]">
-        ✓
-      </span>
-      {children}
-    </li>
-  );
-}
-
-function Roadmap() {
-  return (
-    <section id="roadmap" className="scroll-mt-16 bg-[#0E1424] px-4 py-16 sm:py-24">
-      <div className="mx-auto max-w-3xl">
-        <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9974A]">
-            The Whole Process
-          </p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
-            Nine steps. No step skipped.
-          </h2>
-        </div>
-
-        <ol className="mt-12 space-y-0">
-          {g.steps.map((step, i) => (
-            <li key={step.title} className="relative flex gap-5 pb-10 last:pb-0">
-              {i < g.steps.length - 1 && (
-                <span
-                  aria-hidden="true"
-                  className="absolute left-[15px] top-8 h-full w-px bg-[#C9974A]/30"
-                />
-              )}
-              <span className="relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#C9974A] text-sm font-bold text-[#151A30]">
-                {i + 1}
-              </span>
-              <div>
-                <h3 className="font-bold text-white">{step.title}</h3>
-                <p className="mt-1 text-sm text-white/60">{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
-    </section>
-  );
-}
-
-function InsideLook() {
-  return (
-    <section className="bg-[#F7F3EA] px-4 py-16 text-[#151A30] sm:py-20">
-      <div className="mx-auto max-w-5xl">
-        <div className="text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-[#C9974A]">
-            Inside the Guide
-          </p>
-          <h2 className="mt-2 text-2xl font-extrabold tracking-tight sm:text-3xl">
-            Every step, laid out for you
-          </h2>
-        </div>
-
-        <div className="mt-10 grid gap-8 sm:grid-cols-2">
-          <PreviewFrame src="/0to1000/roadmap.png" alt="One page roadmap of all 9 steps" tilt={-2} />
-          <PreviewFrame
-            src="/0to1000/step-preview.png"
-            alt="Step 2: structure it with AI, with a copy-paste prompt"
-            tilt={2}
-          />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function PreviewFrame({ src, alt, tilt }: { src: string; alt: string; tilt: number }) {
-  return (
-    <div
-      style={{ transform: `rotate(${tilt}deg)` }}
-      className="mx-auto w-full max-w-[260px] overflow-hidden rounded-xl bg-white shadow-xl shadow-black/10 ring-1 ring-black/5"
-    >
-      <div className="relative aspect-[1375/2035] w-full">
-        <Image src={src} alt={alt} fill sizes="260px" className="object-cover" />
-      </div>
-    </div>
   );
 }
 
@@ -277,24 +149,6 @@ function Faq() {
             </div>
           ))}
         </dl>
-      </div>
-    </section>
-  );
-}
-
-function FinalCta() {
-  return (
-    <section className="bg-[#0E1424] px-4 py-16 text-center sm:py-24">
-      <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-        Turn the page. <span className="text-[#C9974A]">Build it.</span>
-      </h2>
-      <p className="mx-auto mt-3 max-w-md text-white/60">
-        Nine steps, start to finish. Total cost to go live: about $1.
-      </p>
-      <div className="mt-8 flex justify-center">
-        <GoldButton href={g.checkoutUrl}>
-          Get the Playbook — {formatMoney(g.price, g.currency)}
-        </GoldButton>
       </div>
     </section>
   );

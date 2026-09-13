@@ -12,57 +12,6 @@ export const zeroToThousand = {
   checkoutUrl: 'https://payhip.com/b/3IJo2',
   coverImage: '/0to1000/cover.jpg',
 
-  audience: [
-    'Complete beginners — no coding, design, or marketing experience needed.',
-    'Anyone with a phone, an internet connection, and one idea worth sharing.',
-    'Creators who already post on Instagram or TikTok and want a product to sell, not just views.',
-  ],
-
-  outcomes: [
-    'A finished digital product, priced and ready to sell.',
-    'Your own landing page, live on the internet with a real domain — for about $1.',
-    'A simple daily content habit that keeps bringing in buyers after launch.',
-  ],
-
-  steps: [
-    {
-      title: 'Pick a Topic',
-      body: "You don't need an original idea — you need a proven one. Search \"ebook\" on Instagram and TikTok, copy what's already selling, or ask AI for ideas in your niche.",
-    },
-    {
-      title: 'Structure It With AI',
-      body: 'Give Claude or ChatGPT your topic and get a full outline in minutes, then have it write each section in your own voice.',
-    },
-    {
-      title: 'Design It in Canva',
-      body: 'Pick a template that matches your price point, keep the same fonts and colors on every page, export as a PDF.',
-    },
-    {
-      title: 'Build the Landing Page',
-      body: 'Ask ChatGPT or Claude to build a single-file HTML landing page in your cover’s colors — no developer required.',
-    },
-    {
-      title: 'Upload to Gumroad',
-      body: 'Create your product, upload the PDF, set your price, and generate a matching cover with one Gemini prompt.',
-    },
-    {
-      title: 'Wire the Buy Button',
-      body: 'Copy your Gumroad product link and paste it into every "Buy Now" button on your page.',
-    },
-    {
-      title: 'Deploy to Netlify',
-      body: 'Drag your whole project folder into Netlify. Your page goes live instantly on a free link.',
-    },
-    {
-      title: 'Buy Your $1 Domain',
-      body: 'Grab a domain from IONOS for about $1 the first year and connect it straight to your Netlify site.',
-    },
-    {
-      title: 'Market It — Every Day',
-      body: "Post two videos a day, say \"link in bio,\" and don't stop for at least a week. Then check your results.",
-    },
-  ],
-
   faq: [
     {
       q: 'Do I need any coding or design experience?',
