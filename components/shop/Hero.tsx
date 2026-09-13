@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { CSSProperties } from 'react';
 import type { Product } from '@/types/product';
 import { brand } from '@/content/site';
@@ -27,13 +28,11 @@ export function Hero({ products }: { products: Product[] }) {
             Small tools. <em className="font-serif font-medium italic">Big</em> progress.
           </h1>
 
-          {/* Phones get the collage instead of the paragraph — showing
-              the products reads faster than a sentence at this size. */}
-          <div className="mt-5 flex items-start justify-center gap-3 sm:hidden">
-            {collage.map((product, i) => (
-              <CollageCard key={product.slug} product={product} tilt={i % 2 === 0 ? -3 : 3} size="sm" />
-            ))}
-          </div>
+          {/* Phones get a stacked screenshot preview instead of the
+              paragraph — showing the actual trackers reads faster than a
+              sentence at this size. It fades to white at the bottom so
+              the single mobile CTA reads as part of the same visual. */}
+          <ScreenshotStack products={collage} />
 
           <p className="mx-auto mt-5 hidden max-w-md text-base text-neutral-600 sm:block sm:text-lg lg:mx-0">
             {brand.name} makes small, beautifully designed digital tools — habit trackers,
@@ -41,7 +40,16 @@ export function Hero({ products }: { products: Product[] }) {
             turns into something you can actually see.
           </p>
 
-          <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start">
+          <div className="relative z-10 -mt-8 flex justify-center sm:hidden">
+            <a
+              href="#shop"
+              className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-neutral-900 px-8 text-base font-semibold text-white shadow-lg transition-colors duration-150 hover:bg-neutral-700"
+            >
+              Get it now
+            </a>
+          </div>
+
+          <div className="mt-8 hidden items-center gap-3 sm:flex sm:justify-center lg:justify-start">
             <a
               href="#shop"
               className="inline-flex min-h-[44px] items-center justify-center rounded-full bg-neutral-900 px-7 text-base font-semibold text-white transition-colors duration-150 hover:bg-neutral-700"
@@ -70,15 +78,7 @@ export function Hero({ products }: { products: Product[] }) {
   );
 }
 
-function CollageCard({
-  product,
-  tilt,
-  size = 'default',
-}: {
-  product: Product;
-  tilt: number;
-  size?: 'default' | 'sm';
-}) {
+function CollageCard({ product, tilt }: { product: Product; tilt: number }) {
   const style = {
     '--ink': product.theme.ink,
     '--primary': product.theme.primary,
@@ -90,30 +90,64 @@ function CollageCard({
     '--tint': product.theme.tint,
     transform: `rotate(${tilt}deg)`,
   } as CSSProperties;
-  const isSmall = size === 'sm';
 
   return (
     <div
       style={style}
-      className={`flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-xl shadow-neutral-900/10 ${
-        isSmall ? 'w-24' : 'w-40 sm:w-44'
-      }`}
+      className="w-40 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-xl shadow-neutral-900/10 sm:w-44"
     >
       <div className="relative aspect-square w-full overflow-hidden bg-[var(--pale)]">
         <ProductPreview previewType={product.previewType} aspectClassName="aspect-square" />
-        <p
-          className={`absolute inset-x-0 bottom-0 px-3 pb-2 font-extrabold uppercase tracking-wide text-[var(--ink)] ${
-            isSmall ? 'text-[10px]' : 'text-xs'
-          }`}
-        >
+        <p className="absolute inset-x-0 bottom-0 px-3 pb-2 text-xs font-extrabold uppercase tracking-wide text-[var(--ink)]">
           {product.name}
         </p>
       </div>
-      {!isSmall && (
-        <div className="p-2.5">
-          <MiniDashboard />
+      <div className="p-2.5">
+        <MiniDashboard />
+      </div>
+    </div>
+  );
+}
+
+// Mobile-only hero visual: two real tracker screenshots, stacked at an
+// angle like a phone-screen deck, fading to white at the bottom so the
+// single "Get it now" CTA below reads as part of the same shape.
+function ScreenshotStack({ products }: { products: Product[] }) {
+  const [front, back] = products;
+  if (!front) return null;
+
+  return (
+    <div className="relative mt-6 sm:hidden">
+      <div className="relative mx-auto h-72 w-48">
+        {back?.screenshots[0] && (
+          <div className="absolute inset-0 translate-x-5 translate-y-3 rotate-6">
+            <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-lg ring-1 ring-black/5">
+              <Image
+                src={back.screenshots[0].src}
+                alt=""
+                fill
+                sizes="192px"
+                className="object-cover object-top"
+              />
+            </div>
+          </div>
+        )}
+        <div className="absolute inset-0 -translate-x-3 -rotate-3">
+          <div className="relative h-full w-full overflow-hidden rounded-2xl shadow-xl ring-1 ring-black/5">
+            <Image
+              src={front.screenshots[0].src}
+              alt=""
+              fill
+              sizes="192px"
+              className="object-cover object-top"
+            />
+          </div>
         </div>
-      )}
+      </div>
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-white"
+      />
     </div>
   );
 }
