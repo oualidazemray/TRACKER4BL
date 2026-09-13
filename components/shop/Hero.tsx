@@ -23,16 +23,19 @@ export function Hero({ products }: { products: Product[] }) {
 
       <div className="mx-auto grid max-w-6xl items-center gap-12 lg:grid-cols-[1.1fr_1fr]">
         <div className="text-center lg:text-left">
-          <span className="inline-flex items-center gap-2 rounded-full border border-black/5 bg-white px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-neutral-600 shadow-sm">
-            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-500" />
-            Digital tools, made to open
-          </span>
-
-          <h1 className="mt-5 text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
+          <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-neutral-900 sm:text-5xl">
             Small tools. <em className="font-serif font-medium italic">Big</em> progress.
           </h1>
 
-          <p className="mx-auto mt-5 max-w-md text-base text-neutral-600 sm:text-lg lg:mx-0">
+          {/* Phones get the collage instead of the paragraph — showing
+              the products reads faster than a sentence at this size. */}
+          <div className="mt-5 flex items-start justify-center gap-3 sm:hidden">
+            {collage.map((product, i) => (
+              <CollageCard key={product.slug} product={product} tilt={i % 2 === 0 ? -3 : 3} size="sm" />
+            ))}
+          </div>
+
+          <p className="mx-auto mt-5 hidden max-w-md text-base text-neutral-600 sm:block sm:text-lg lg:mx-0">
             {brand.name} makes small, beautifully designed digital tools — habit trackers,
             planners, and more — built right into Google Sheets, so a little daily effort
             turns into something you can actually see.
@@ -54,7 +57,7 @@ export function Hero({ products }: { products: Product[] }) {
           </div>
         </div>
 
-        <div className="relative mx-auto w-full max-w-sm lg:max-w-none">
+        <div className="relative mx-auto hidden w-full max-w-sm sm:block lg:max-w-none">
           <div className="relative flex flex-col gap-6 sm:flex-row sm:justify-center lg:justify-end">
             {collage.map((product, i) => (
               <CollageCard key={product.slug} product={product} tilt={i % 2 === 0 ? -3 : 3} />
@@ -67,7 +70,15 @@ export function Hero({ products }: { products: Product[] }) {
   );
 }
 
-function CollageCard({ product, tilt }: { product: Product; tilt: number }) {
+function CollageCard({
+  product,
+  tilt,
+  size = 'default',
+}: {
+  product: Product;
+  tilt: number;
+  size?: 'default' | 'sm';
+}) {
   const style = {
     '--ink': product.theme.ink,
     '--primary': product.theme.primary,
@@ -79,21 +90,30 @@ function CollageCard({ product, tilt }: { product: Product; tilt: number }) {
     '--tint': product.theme.tint,
     transform: `rotate(${tilt}deg)`,
   } as CSSProperties;
+  const isSmall = size === 'sm';
 
   return (
     <div
       style={style}
-      className="w-40 flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-xl shadow-neutral-900/10 sm:w-44"
+      className={`flex-shrink-0 overflow-hidden rounded-2xl bg-white shadow-xl shadow-neutral-900/10 ${
+        isSmall ? 'w-24' : 'w-40 sm:w-44'
+      }`}
     >
       <div className="relative aspect-square w-full overflow-hidden bg-[var(--pale)]">
         <ProductPreview previewType={product.previewType} aspectClassName="aspect-square" />
-        <p className="absolute inset-x-0 bottom-0 px-3 pb-2 text-xs font-extrabold uppercase tracking-wide text-[var(--ink)]">
+        <p
+          className={`absolute inset-x-0 bottom-0 px-3 pb-2 font-extrabold uppercase tracking-wide text-[var(--ink)] ${
+            isSmall ? 'text-[10px]' : 'text-xs'
+          }`}
+        >
           {product.name}
         </p>
       </div>
-      <div className="p-2.5">
-        <MiniDashboard />
-      </div>
+      {!isSmall && (
+        <div className="p-2.5">
+          <MiniDashboard />
+        </div>
+      )}
     </div>
   );
 }
