@@ -5,6 +5,7 @@ export const bloom: Product = {
   name: 'BLOOM',
   audience: 'for women',
   category: 'Habit Trackers',
+  coverImage: '/imgs/women.jpg',
   tagline: 'Tick a box. Watch your flower grow.',
   shortDescription:
     'A Google Sheets habit tracker where a flower grows under each day as you tick your habits off.',

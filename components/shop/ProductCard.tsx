@@ -36,6 +36,8 @@ export function ProductCard({ product }: { product: Product }) {
 
       <ProductPreview
         previewType={product.previewType}
+        coverImage={product.coverImage}
+        coverAlt={`${product.name} cover`}
         stickerSrc={stage?.image}
         stickerAlt={stage ? `${product.name} at ${stage.label}` : undefined}
       />

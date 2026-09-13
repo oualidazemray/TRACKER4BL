@@ -3,35 +3,54 @@ import type { ProductPreviewType } from '@/types/product';
 
 type ProductPreviewProps = {
   previewType?: ProductPreviewType;
+  coverImage?: string;
+  coverAlt?: string;
   stickerSrc?: string;
   stickerAlt?: string;
   className?: string;
 };
 
-// Every preview is pure CSS/SVG shapes composed from the product's own
-// theme vars (set by whoever renders this — ProductCard, the hero
-// collage — via inline `--primary` etc.), never a stock photo or a
-// pretend screenshot. previewType is product data, so a future product
-// just picks whichever motif fits its category — no new component.
+// When a product supplies a real cover image, it wins outright — no
+// motif, no sticker. Otherwise every preview is pure CSS/SVG shapes
+// composed from the product's own theme vars (set by whoever renders
+// this — ProductCard, the hero collage — via inline `--primary` etc.).
+// previewType is product data, so a future product without a cover
+// photo just picks whichever motif fits its category — no new component.
 export function ProductPreview({
   previewType = 'grid',
+  coverImage,
+  coverAlt,
   stickerSrc,
   stickerAlt,
   className = '',
 }: ProductPreviewProps) {
   return (
     <div
-      className={`relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-[var(--pale)] ${className}`}
+      className={`relative w-full overflow-hidden rounded-xl bg-[var(--pale)] ${
+        coverImage ? 'aspect-[29/36]' : 'aspect-[4/3]'
+      } ${className}`}
     >
-      {previewType === 'organic' && <OrganicMotif />}
-      {previewType === 'blaze' && <BlazeMotif />}
-      {previewType === 'grid' && <GridMotif />}
-      {previewType === 'chart' && <ChartMotif />}
+      {coverImage ? (
+        <Image
+          src={coverImage}
+          alt={coverAlt ?? ''}
+          fill
+          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 45vw, 90vw"
+          className="object-cover"
+        />
+      ) : (
+        <>
+          {previewType === 'organic' && <OrganicMotif />}
+          {previewType === 'blaze' && <BlazeMotif />}
+          {previewType === 'grid' && <GridMotif />}
+          {previewType === 'chart' && <ChartMotif />}
 
-      {stickerSrc && (
-        <div className="absolute bottom-2 right-2 h-9 w-9 drop-shadow-sm sm:h-11 sm:w-11">
-          <Image src={stickerSrc} alt={stickerAlt ?? ''} fill sizes="44px" className="object-contain" />
-        </div>
+          {stickerSrc && (
+            <div className="absolute bottom-2 right-2 h-9 w-9 drop-shadow-sm sm:h-11 sm:w-11">
+              <Image src={stickerSrc} alt={stickerAlt ?? ''} fill sizes="44px" className="object-contain" />
+            </div>
+          )}
+        </>
       )}
     </div>
   );

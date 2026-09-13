@@ -5,6 +5,7 @@ export const forge: Product = {
   name: 'FORGE',
   audience: 'for men',
   category: 'Habit Trackers',
+  coverImage: '/imgs/men.jpg',
   tagline: 'Tick a box. Feed the fire.',
   shortDescription:
     'A Google Sheets habit tracker where a fire builds under each day as you tick your habits off.',

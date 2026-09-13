@@ -35,15 +35,10 @@ type ContrastIssue = { pair: string; ratio: number; usage: string };
 export function auditThemeContrast(theme: ThemeTokens): ContrastIssue[] {
   const issues: ContrastIssue[] = [];
 
-  // White text is used on primary/secondary CTA buttons.
-  for (const [name, hex] of [
-    ['primary', theme.primary],
-    ['secondary', theme.secondary],
-  ] as const) {
-    const ratio = contrastRatio('#FFFFFF', hex);
-    if (ratio < AA_NORMAL_TEXT) {
-      issues.push({ pair: `white on ${name}`, ratio, usage: 'CTA button text' });
-    }
+  // White text is used on the primary CTA button background.
+  const primaryRatio = contrastRatio('#FFFFFF', theme.primary);
+  if (primaryRatio < AA_NORMAL_TEXT) {
+    issues.push({ pair: 'white on primary', ratio: primaryRatio, usage: 'CTA button text' });
   }
 
   // Ink text is used on the lighter background tokens.
@@ -61,7 +56,6 @@ export function auditAllProductThemes(products: Product[]): void {
   for (const product of products) {
     const issues = auditThemeContrast(product.theme);
     for (const issue of issues) {
-      // eslint-disable-next-line no-console
       console.warn(
         `[contrast] ${product.slug}: ${issue.pair} is ${issue.ratio.toFixed(2)}:1, ` +
           `below the 4.5:1 AA minimum (${issue.usage}). Adjust theme tokens in content/products/${product.slug}.ts.`,

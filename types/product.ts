@@ -66,6 +66,7 @@ export type Product = {
   name: string;
   audience?: string;
   category: string;
+  coverImage?: string;
   tagline: string;
   shortDescription: string;
   longDescription: string;
