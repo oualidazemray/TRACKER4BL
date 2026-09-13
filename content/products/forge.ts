@@ -32,7 +32,7 @@ export const forge: Product = {
     price: 5,
     guidePrice: 1,
     currency: 'USD',
-    checkoutUrl: 'TODO_PAYHIP_FORGE',
+    checkoutUrl: 'https://payhip.com/b/zD8s0',
   },
 
   hero: {

@@ -32,7 +32,7 @@ export const bloom: Product = {
     price: 5,
     guidePrice: 1,
     currency: 'USD',
-    checkoutUrl: 'TODO_PAYHIP_BLOOM',
+    checkoutUrl: 'https://payhip.com/b/eFJ8q',
   },
 
   hero: {
